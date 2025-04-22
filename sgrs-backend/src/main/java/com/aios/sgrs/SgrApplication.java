@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @ComponentScan(basePackages = {
 		"com.aios.sgrs",
-		"com.aios.sgrs.aop"
+		"com.aios.sgrs.aop" 
 })
 public class SgrApplication extends SpringBootServletInitializer {
 
