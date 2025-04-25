@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 @EnableAspectJAutoProxy(proxyTargetClass = false)
 @SpringBootApplication
 @ComponentScan(basePackages = {
-		"com.aios.sgrs",
+		"com.aios",
 		"com.aios.sgrs.aop"
 })
 public class SgrApplication extends SpringBootServletInitializer {
