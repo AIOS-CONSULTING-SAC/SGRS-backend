@@ -1,10 +1,9 @@
 package com.aios.sgrs.security;
 
 import com.aios.sgrs.dao.UsuarioDao;
-import com.aios.sgrs.model.request.seguridad.UsuarioLogeadoResponse;
+import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;

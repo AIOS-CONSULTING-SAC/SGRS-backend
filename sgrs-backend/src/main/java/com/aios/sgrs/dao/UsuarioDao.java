@@ -1,7 +1,7 @@
 package com.aios.sgrs.dao;
 
 import com.aios.common.exception.AccesoDaoException;
-import com.aios.sgrs.model.request.seguridad.UsuarioLogeadoResponse;
+import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
 
 public interface UsuarioDao {

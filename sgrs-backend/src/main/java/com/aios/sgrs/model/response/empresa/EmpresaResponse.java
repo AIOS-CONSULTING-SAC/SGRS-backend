@@ -1,5 +1,6 @@
 package com.aios.sgrs.model.response.empresa;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import java.util.Date;
 @ToString
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmpresaResponse {
     private Integer empresa;
     private String ruc;

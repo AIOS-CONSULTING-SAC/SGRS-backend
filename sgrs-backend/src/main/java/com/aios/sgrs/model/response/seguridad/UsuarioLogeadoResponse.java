@@ -1,4 +1,4 @@
-package com.aios.sgrs.model.request.seguridad;
+package com.aios.sgrs.model.response.seguridad;
 
 import lombok.Getter;
 import lombok.Setter;

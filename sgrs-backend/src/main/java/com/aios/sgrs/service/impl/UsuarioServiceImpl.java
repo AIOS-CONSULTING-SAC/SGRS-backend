@@ -3,7 +3,7 @@ package com.aios.sgrs.service.impl;
 import com.aios.common.exception.ServiceException;
 import com.aios.common.response.ApiResponseBuilder;
 import com.aios.sgrs.dao.UsuarioDao;
-import com.aios.sgrs.model.request.seguridad.UsuarioLogeadoResponse;
+import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
 import com.aios.sgrs.service.EmailService;

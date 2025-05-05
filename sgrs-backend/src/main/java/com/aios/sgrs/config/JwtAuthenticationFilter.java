@@ -10,8 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -33,13 +31,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse res,
                                     FilterChain         chain)
             throws IOException, ServletException {
+
+        if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
+            chain.doFilter(req, res);
+            return;
+        }
         String header = req.getHeader("Authorization");
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             if (jwtService.validateToken(token)) {
                 Claims claims = jwtService.extractAllClaims(token);
                 String username = claims.getSubject();
-                Integer rolId  = claims.get("rolId", Integer.class);
+                Integer rolId  = claims.get("codigoRol", Integer.class);
 
                 List<GrantedAuthority> auths = new ArrayList<>();
                 if (rolId != null) {

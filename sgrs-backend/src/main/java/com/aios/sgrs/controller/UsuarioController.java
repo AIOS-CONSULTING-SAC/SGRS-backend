@@ -1,6 +1,6 @@
 package com.aios.sgrs.controller;
 
-import com.aios.sgrs.model.request.seguridad.UsuarioLogeadoResponse;
+import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
 import com.aios.sgrs.security.JwtService;
@@ -24,16 +24,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/v1/usuarios")
 public class UsuarioController {
-    private final AuthenticationManager authManager;
+    //private final AuthenticationManager authManager;
     private final JwtService jwtService;
     private final UsuarioService usuarioService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     public UsuarioController(UsuarioService usuarioService,
-                             AuthenticationManager authManager,
+                             //                       AuthenticationManager authManager,
                              JwtService jwtService) {
         this.usuarioService = usuarioService;
-        this.authManager = authManager;
+      //  this.authManager = authManager;
         this.jwtService = jwtService;
     }
 
@@ -52,9 +50,12 @@ public class UsuarioController {
         }
 
         Map<String,Object> claims = new HashMap<>();
-        claims.put("rolId", usuarioLogeadoResponse.getRolId());
+        claims.put("codigoRol", usuarioLogeadoResponse.getRolId());
+        claims.put("codigoEmpresa", usuarioLogeadoResponse.getEmpresaId());
+        claims.put("codigoUsuario", usuarioLogeadoResponse.getUsuarioId());
         claims.put("tipoUsuario", usuarioLogeadoResponse.getTipoUsuarioId());
-
+        claims.put("nombres", usuarioLogeadoResponse.getNombres());
+        claims.put("apellidos", usuarioLogeadoResponse.getApellidos());
         String accessToken = jwtService.generateToken(
                 claims,
                 req.getUsuario(),
