@@ -29,6 +29,7 @@ public class EmpresaServiceImpl implements EmpresaService {
     @Override
     public ApiResponse listado(String razonSocial, String ruc, Integer idEstado) throws ServiceException {
         List<EmpresaResponse> listado = empresaDao.listado(1,razonSocial, ruc, idEstado);
+        System.out.printf("listado_xd: ", listado);
         return Objeto.nonEmpty(listado)
                 ? ApiResponse.exito(responseBuilder.respuestaConExito(listado).getBody())
                 : ApiResponse.noHayResultados(null);

@@ -51,7 +51,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
                     r.setMensaje(rs.getString("mensaje"));
                     r.setUsuarioId(rs.getInt("usuario_id"));
                     r.setNombres(rs.getString("nombres"));
-                    r.setApellidos(rs.getString("apellidos"));
+                    r.setApellidoP(rs.getString("apellidoP"));
+                    r.setApellidoM(rs.getString("apellidoM"));
                     r.setPassword(rs.getString("password"));
                     r.setTipoUsuarioId(rs.getInt("tipo_usuario_id"));
                     r.setRolId(rs.getObject("rol_id") != null ? rs.getInt("rol_id") : null);

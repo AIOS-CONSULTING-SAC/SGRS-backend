@@ -17,9 +17,9 @@ public class EmpresaResponse {
     private String razonSocial;
     private String nombreComercial;
     private String codigoUbigeo;
-    private String idDepartamento;
-    private String idProvincia;
-    private String idDistrito;
+    private Integer idDepartamento;
+    private Integer idProvincia;
+    private Integer idDistrito;
     private String direccion;
     private short idEstado;
     private String descEstado;
