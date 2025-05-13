@@ -51,6 +51,9 @@ public class UsuarioController {
 //            return ApiResponse.error("La contraseña es incorrecta");
 //        }
 
+        //if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
+        //    return ApiResponse.error("La contraseña es incorrecta");
+        //}
 
         Map<String,Object> claims = new HashMap<>();
         claims.put("codigoRol", usuarioLogeadoResponse.getRolId());

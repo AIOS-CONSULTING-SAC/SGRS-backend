@@ -16,7 +16,11 @@ public class EmpresaResponse {
     private String ruc;
     private String razonSocial;
     private String nombreComercial;
+
 //    private String codigoUbigeo;
+
+    private String codigoUbigeo;
+
     private Integer idDepartamento;
     private Integer idProvincia;
     private Integer idDistrito;
