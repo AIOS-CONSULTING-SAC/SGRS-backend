@@ -1,4 +1,4 @@
-package com.aios.sgrs.model.response.empresa;
+package com.aios.sgrs.model.response.local;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -11,12 +11,10 @@ import java.util.Date;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EmpresaResponse {
-    private Integer empresa;
-    private String ruc;
-    private String razonSocial;
-    private String nombreComercial;
-//    private String codigoUbigeo;
+public class LocalResponse {
+    private Integer local;
+    private Integer codCliente;
+    private String nombre;
     private Integer idDepartamento;
     private Integer idProvincia;
     private Integer idDistrito;
@@ -24,4 +22,5 @@ public class EmpresaResponse {
     private short idEstado;
     private String descEstado;
     private Date fechaRegistro;
+
 }

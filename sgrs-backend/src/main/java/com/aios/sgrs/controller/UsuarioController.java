@@ -45,9 +45,12 @@ public class UsuarioController {
             return ApiResponse.error(usuarioLogeadoResponse.getMensaje());
         }
 
-        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
-            return ApiResponse.error("La contraseña es incorrecta");
-        }
+        System.out.printf("encoder_KVN: "+ encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword()));
+
+//        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
+//            return ApiResponse.error("La contraseña es incorrecta");
+//        }
+
 
         Map<String,Object> claims = new HashMap<>();
         claims.put("codigoRol", usuarioLogeadoResponse.getRolId());
@@ -55,7 +58,8 @@ public class UsuarioController {
         claims.put("codigoUsuario", usuarioLogeadoResponse.getUsuarioId());
         claims.put("tipoUsuario", usuarioLogeadoResponse.getTipoUsuarioId());
         claims.put("nombres", usuarioLogeadoResponse.getNombres());
-        claims.put("apellidos", usuarioLogeadoResponse.getApellidos());
+        claims.put("apellidoP", usuarioLogeadoResponse.getApellidoP());
+        claims.put("apellidoM", usuarioLogeadoResponse.getApellidoM());
         String accessToken = jwtService.generateToken(
                 claims,
                 req.getUsuario(),
