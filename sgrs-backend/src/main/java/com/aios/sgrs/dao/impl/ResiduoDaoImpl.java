@@ -1,14 +1,10 @@
 package com.aios.sgrs.dao.impl;
 
 import com.aios.common.exception.AccesoDaoException;
-import com.aios.sgrs.dao.LocalDao;
 import com.aios.sgrs.dao.ResiduoDao;
-import com.aios.sgrs.model.request.local.EliminarLocalRequest;
-import com.aios.sgrs.model.request.local.GuardarLocalRequest;
 import com.aios.sgrs.model.request.residuo.EliminarResiduoRequest;
 import com.aios.sgrs.model.request.residuo.GuardarResiduoRequest;
-import com.aios.sgrs.model.response.local.LocalResponse;
-import com.aios.sgrs.model.response.local.ResiduoResponse;
+import com.aios.sgrs.model.response.residuo.ResiduoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

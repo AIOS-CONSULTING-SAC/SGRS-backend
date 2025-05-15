@@ -1,5 +1,6 @@
 package com.aios.sgrs.controller;
 
+import com.aios.sgrs.model.request.residuo.GuardarResiduoRequest;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
@@ -88,5 +89,18 @@ public class UsuarioController {
         return usuarioService.guardarUsuario(request);
     }
 
+    @PutMapping(value = "/actualizar", produces = MediaType.APPLICATION_JSON_VALUE)
+    ApiResponse actualizar(@Valid @RequestBody GuardarUsuarioRequest request){
+        return usuarioService.guardarUsuario(request);
+    }
+
+
+    @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
+    ApiResponse listarUsuarios(@RequestParam(value = "codUsuario",required = false) Integer codUsuario,
+                               @RequestParam(value = "codEmpresa",required = false) Integer codEmpresa,
+                               @RequestParam(value = "codCliente",required = false) Integer codCliente,
+                               @RequestParam(value = "idEstado",required = false) Integer idEstado){
+        return usuarioService.listado(codUsuario, codEmpresa, codCliente, idEstado);
+    }
 
 }

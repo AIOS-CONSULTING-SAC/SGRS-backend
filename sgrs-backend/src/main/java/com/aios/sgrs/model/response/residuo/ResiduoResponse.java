@@ -1,4 +1,4 @@
-package com.aios.sgrs.model.response.local;
+package com.aios.sgrs.model.response.residuo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

@@ -3,8 +3,13 @@ package com.aios.sgrs.dao;
 import com.aios.common.exception.AccesoDaoException;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
+import com.aios.sgrs.model.response.usuario.UsuarioResponse;
+
+import java.util.List;
 
 public interface UsuarioDao {
     boolean guardarUsuario(GuardarUsuarioRequest request) throws AccesoDaoException;
     UsuarioLogeadoResponse iniciarSesion(String usuario, String password) throws AccesoDaoException;
+
+    List<UsuarioResponse> listado(int tipoSQL, Integer codUsuario, Integer codEmpresa, Integer codClinete, Integer idEstado) throws AccesoDaoException;
 }

@@ -4,12 +4,15 @@ import com.aios.common.exception.AccesoDaoException;
 import com.aios.sgrs.dao.UsuarioDao;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
+import com.aios.sgrs.model.response.usuario.UsuarioResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.CallableStatement;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UsuarioDaoImpl implements UsuarioDao {
@@ -73,5 +76,40 @@ public class UsuarioDaoImpl implements UsuarioDao {
                     return r;
                 }
         );
+    }
+
+    @Override
+    public List<UsuarioResponse> listado(int tipoSQL, Integer codUsuario, Integer codEmpresa, Integer codClinete, Integer idEstado) throws AccesoDaoException {
+        String sql = "{CALL sp_listar_usuarios(?, ?, ?, ?, ?)}";
+        List<UsuarioResponse> listado = new ArrayList<>();
+
+        return jdbcTemplate.query(sql, new Object[]{tipoSQL, codUsuario, codEmpresa, codClinete, idEstado}, rs -> {
+
+            UsuarioResponse usuario;
+            while (rs.next()) {
+                usuario = new UsuarioResponse();
+
+                usuario.setUsuario(rs.getInt(1));
+                usuario.setCodEmpresa(rs.getInt(2));
+                usuario.setCodCliente(rs.getInt(3));
+                usuario.setCodTipoUser(rs.getInt(4));
+                usuario.setCodPerfil(rs.getInt(5));
+                usuario.setCodTipoDoc(rs.getInt(6));
+                usuario.setNdoc(rs.getString(7));
+                usuario.setNombre(rs.getString(8));
+                usuario.setApellidoP(rs.getString(9));
+                usuario.setApellidoM(rs.getString(10));
+                usuario.setCorreo(rs.getString(11));
+
+                usuario.setIdEstado(rs.getShort(12));
+
+                usuario.setDescEstado(usuario.getIdEstado()==1 ? "Activo" : "Inactivo");
+                usuario.setFechaRegistro(rs.getDate(13));
+                listado.add(usuario);
+            }
+
+            return listado;
+
+        });
     }
 }

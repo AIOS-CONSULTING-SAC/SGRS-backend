@@ -19,8 +19,6 @@ public class EmpresaResponse {
 
 //    private String codigoUbigeo;
 
-    private String codigoUbigeo;
-
     private Integer idDepartamento;
     private Integer idProvincia;
     private Integer idDistrito;

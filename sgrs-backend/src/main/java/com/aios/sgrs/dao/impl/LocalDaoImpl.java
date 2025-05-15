@@ -48,6 +48,7 @@ public class LocalDaoImpl implements LocalDao {
                 local.setDireccion(rs.getString(7));
                 local.setIdEstado(rs.getShort(8));
                 local.setDescEstado(local.getIdEstado()==1 ? "Activo" : "Inactivo");
+                local.setCodUserReg(rs.getInt(9));
                 local.setFechaRegistro(rs.getDate(10));
                 listado.add(local);
             }

@@ -3,7 +3,7 @@ package com.aios.sgrs.dao;
 import com.aios.common.exception.AccesoDaoException;
 import com.aios.sgrs.model.request.residuo.EliminarResiduoRequest;
 import com.aios.sgrs.model.request.residuo.GuardarResiduoRequest;
-import com.aios.sgrs.model.response.local.ResiduoResponse;
+import com.aios.sgrs.model.response.residuo.ResiduoResponse;
 
 import java.util.List;
 

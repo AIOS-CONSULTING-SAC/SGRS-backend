@@ -2,16 +2,21 @@ package com.aios.sgrs.service.impl;
 
 import com.aios.common.exception.ServiceException;
 import com.aios.common.response.ApiResponseBuilder;
+import com.aios.sgrs.Objeto;
 import com.aios.sgrs.dao.UsuarioDao;
+import com.aios.sgrs.model.response.residuo.ResiduoResponse;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
+import com.aios.sgrs.model.response.usuario.UsuarioResponse;
 import com.aios.sgrs.service.EmailService;
 import com.aios.sgrs.service.UsuarioService;
 import com.aios.sgrs.utils.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -66,4 +71,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioLogeadoResponse iniciarSesion(UsuarioRequest usuarioRequest, HttpServletRequest request) {
         return usuarioDao.iniciarSesion(usuarioRequest.getUsuario(), usuarioRequest.getPassword());
     }
+
+
+    @Override
+    public ApiResponse listado(Integer codUsuario, Integer codEmpresa, Integer codCliente, Integer idEstado) throws ServiceException {
+        List<UsuarioResponse> listado = usuarioDao.listado(1,codUsuario, codEmpresa, codCliente, idEstado);
+
+        return Objeto.nonEmpty(listado)
+                ? ApiResponse.exito(responseBuilder.respuestaConExito(listado).getBody())
+                : ApiResponse.noHayResultados(null);
+    }
+
 }
