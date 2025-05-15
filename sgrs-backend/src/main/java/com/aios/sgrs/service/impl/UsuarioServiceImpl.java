@@ -26,20 +26,41 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.responseBuilder = responseBuilder;
     }
 
+//    @Override
+//    public ApiResponse guardarUsuario(GuardarUsuarioRequest request) throws ServiceException {
+//        usuarioDao.guardarUsuario(request);
+//        String codRpuesta = "501";
+//        if(codRpuesta.equals("501")){
+//            try {
+////                emailService.enviarCorreoUsuario( request.getCorreo(), request.getUsuarioSesion(), "123");
+//                emailService.enviarCorreoUsuario( request.getCorreo(), "USUARIO PRUEBA", "123");
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//            return ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());
+//        }
+//        return  ApiResponse.error(codRpuesta);
+//    }
+
     @Override
     public ApiResponse guardarUsuario(GuardarUsuarioRequest request) throws ServiceException {
-        //usuarioDao.guardarUsuario(request);
-        String codRpuesta = "501";
-        if(codRpuesta.equals("501")){
-            try {
-                emailService.enviarCorreoUsuario( request.getCorreo(), request.getUsuarioSesion(), "123");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            return ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());
+        if(request.getIdUsuario()==null){
+            request.setIdEstado((short) 1);
         }
-        return  ApiResponse.error(codRpuesta);
+        usuarioDao.guardarUsuario(request);
+        String codRpuesta = request.getMensaje();
+        if(codRpuesta.equals("200")) {
+//            try {
+//                emailService.enviarCorreoUsuario( request.getCorreo(), "USUARIO PRUEBA", "123");
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//            return ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());
+        }
+
+        return !codRpuesta.equals("200") ? ApiResponse.error(codRpuesta) : ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());
     }
+
 
     @Override
     public UsuarioLogeadoResponse iniciarSesion(UsuarioRequest usuarioRequest, HttpServletRequest request) {

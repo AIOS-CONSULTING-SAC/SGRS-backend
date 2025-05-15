@@ -22,19 +22,32 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
     @Override
     public boolean guardarUsuario(GuardarUsuarioRequest request) throws AccesoDaoException {
-        String sql = "{CALL [PROD].[SQL_PRODUCTO](?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{CALL sp_insertar_actualizar_usuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         return Boolean.TRUE.equals(jdbcTemplate.execute(sql, (CallableStatement cs) -> {
-            cs.setInt(1, request.getIdUsuario());
+
+            cs.setObject(1, request.getIdUsuario(), Types.INTEGER);
             cs.setInt(2, request.getIdEmpresa());
-            cs.setString(3, request.getCorreo());
-            cs.setString(4, request.getPassword());
-            cs.registerOutParameter(5, Types.VARCHAR);
-            cs.registerOutParameter(3, Types.VARCHAR);
-            cs.setString(6, request.getUsuarioSesion());
+            cs.setInt(3, request.getIdcliente());
+            cs.setInt(4, request.getIdTipoUser());
+            cs.setInt(5, request.getIdPerfil());
+            cs.setInt(6, request.getIdTipoDoc());
+            cs.setString(7, request.getNdoc());
+            cs.setString(8, request.getNombre());
+            cs.setString(9, request.getApellidoP());
+            cs.setString(10, request.getApellidoM());
+            cs.setString(11, request.getCorreo());
+            cs.setString(12, request.getPassword());
+            cs.setInt(13, request.getIdEstado());
+            cs.setInt(14, request.getUsuarioSesion());
+
+
+            cs.registerOutParameter(15, Types.VARCHAR);
+            cs.registerOutParameter(16, Types.VARCHAR);
+
 
             boolean rpta = cs.executeUpdate() == 1;
-            request.setMensaje(cs.getString(9));
-            request.setIdUsuario(cs.getInt(1));
+            request.setMensaje(cs.getString(16));
+            request.setIdUsuario(cs.getInt(15));
             return rpta;
         }));
     }

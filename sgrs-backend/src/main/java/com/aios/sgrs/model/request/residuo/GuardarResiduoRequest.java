@@ -18,6 +18,7 @@ public class GuardarResiduoRequest {
 
     private Integer idUnidad;
     private short idEstado;
+
     private Integer usuarioSesion;
 
     private String mensaje;
