@@ -1,8 +1,6 @@
 package com.aios.sgrs.controller;
 
-import com.aios.sgrs.model.request.local.GuardarLocalRequest;
 import com.aios.sgrs.model.request.residuo.GuardarResiduoRequest;
-import com.aios.sgrs.service.LocalService;
 import com.aios.sgrs.service.ResiduoService;
 import com.aios.sgrs.utils.ApiResponse;
 import jakarta.validation.Valid;
