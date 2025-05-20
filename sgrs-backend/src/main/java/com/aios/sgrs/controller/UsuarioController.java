@@ -103,4 +103,10 @@ public class UsuarioController {
         return usuarioService.listado(codUsuario, codEmpresa, codCliente, idEstado);
     }
 
+
+    @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
+    ApiResponse eliminar(@RequestParam("idUsuario") Integer idUsuario,@RequestParam("usuarioSesion") Integer usuarioSesion){
+        return usuarioService.eliminarUsuario(idUsuario, usuarioSesion);
+    }
+
 }

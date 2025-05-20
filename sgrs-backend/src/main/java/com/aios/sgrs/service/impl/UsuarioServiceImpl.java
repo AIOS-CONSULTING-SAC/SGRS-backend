@@ -4,6 +4,7 @@ import com.aios.common.exception.ServiceException;
 import com.aios.common.response.ApiResponseBuilder;
 import com.aios.sgrs.Objeto;
 import com.aios.sgrs.dao.UsuarioDao;
+import com.aios.sgrs.model.request.usuario.EliminarUsuarioRequest;
 import com.aios.sgrs.model.response.residuo.ResiduoResponse;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
@@ -81,5 +82,22 @@ public class UsuarioServiceImpl implements UsuarioService {
                 ? ApiResponse.exito(responseBuilder.respuestaConExito(listado).getBody())
                 : ApiResponse.noHayResultados(null);
     }
+
+
+
+    @Override
+    public ApiResponse eliminarUsuario(Integer idCliente, Integer usuarioSesion) throws ServiceException {
+
+        EliminarUsuarioRequest request = new EliminarUsuarioRequest();
+        request.setUsuario(idCliente);
+        request.setUsuarioSesion(usuarioSesion);
+
+        usuarioDao.eliminarUsuario(request);
+        String codRpuesta = request.getMensaje();
+        return !codRpuesta.equals("200") ? ApiResponse.error(codRpuesta) : ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());
+    }
+
+
+
 
 }

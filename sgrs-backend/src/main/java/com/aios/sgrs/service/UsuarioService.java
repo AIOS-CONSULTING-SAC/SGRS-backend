@@ -12,4 +12,6 @@ public interface UsuarioService {
     UsuarioLogeadoResponse iniciarSesion(UsuarioRequest usuarioRequest, HttpServletRequest request);
 
     ApiResponse listado(Integer codUsuario, Integer codEmpresa, Integer codCliente, Integer idEstado) throws ServiceException;
+
+    ApiResponse eliminarUsuario(Integer idCliente, Integer usuarioSesion) throws ServiceException;
 }

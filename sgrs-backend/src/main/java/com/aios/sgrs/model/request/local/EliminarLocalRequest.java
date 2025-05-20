@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 public class EliminarLocalRequest {
     private Integer local;
-    private String usuarioSesion;
+    private Integer usuarioSesion;
     private String mensaje;
 
 }

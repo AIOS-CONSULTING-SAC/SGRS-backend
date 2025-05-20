@@ -27,7 +27,7 @@ public class ResiduoController {
     }
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApiResponse eliminar(@RequestParam("idResiduo") Integer idResiduo,@RequestParam("usuarioSesion") String usuarioSesion){
+    ApiResponse eliminar(@RequestParam("idResiduo") Integer idResiduo,@RequestParam("usuarioSesion") Integer usuarioSesion){
         return residuoService.eliminarResiduo(idResiduo, usuarioSesion);
     }
 

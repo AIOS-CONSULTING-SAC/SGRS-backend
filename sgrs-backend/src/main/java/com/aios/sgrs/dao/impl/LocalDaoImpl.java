@@ -88,7 +88,7 @@ public class LocalDaoImpl implements LocalDao {
         String sql = "{CALL sp_desactivar_local(?,?,?)}";
         return Boolean.TRUE.equals(jdbcTemplate.execute(sql, (CallableStatement cs) -> {
             cs.setInt(1,request.getLocal());
-            cs.setString(2, request.getUsuarioSesion());
+            cs.setInt(2, request.getUsuarioSesion());
             cs.registerOutParameter(3, Types.VARCHAR);
 
             boolean rpta = cs.executeUpdate() == 1;

@@ -2,6 +2,7 @@ package com.aios.sgrs.dao.impl;
 
 import com.aios.common.exception.AccesoDaoException;
 import com.aios.sgrs.dao.UsuarioDao;
+import com.aios.sgrs.model.request.usuario.EliminarUsuarioRequest;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
 import com.aios.sgrs.model.response.usuario.UsuarioResponse;
@@ -112,4 +113,20 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
         });
     }
+
+
+    @Override
+    public boolean eliminarUsuario(EliminarUsuarioRequest request) throws AccesoDaoException {
+        String sql = "{CALL sp_desactivar_usuario(?,?,?)}";
+        return Boolean.TRUE.equals(jdbcTemplate.execute(sql, (CallableStatement cs) -> {
+            cs.setInt(1,request.getUsuario());
+            cs.setInt(2, request.getUsuarioSesion());
+            cs.registerOutParameter(3, Types.VARCHAR);
+
+            boolean rpta = cs.executeUpdate() == 1;
+            request.setMensaje(cs.getString(3));
+            return rpta;
+        }));
+    }
+
 }

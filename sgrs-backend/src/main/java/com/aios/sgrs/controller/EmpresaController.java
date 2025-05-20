@@ -36,7 +36,7 @@ public class EmpresaController {
     }
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApiResponse eliminar(@RequestParam("idEmpresa") Integer idEmpresa,@RequestParam("usuarioSesion") String usuarioSesion){
+    ApiResponse eliminar(@RequestParam("idEmpresa") Integer idEmpresa,@RequestParam("usuarioSesion") Integer usuarioSesion){
         return empresaService.eliminarEmpresa(idEmpresa, usuarioSesion);
     }
 

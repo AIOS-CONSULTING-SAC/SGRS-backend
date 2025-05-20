@@ -10,6 +10,6 @@ public interface ResiduoService {
 
     ApiResponse guardarResiduo(GuardarResiduoRequest request) throws ServiceException;
 
-    ApiResponse eliminarResiduo(Integer idResiduo, String usuarioSesion) throws ServiceException;
+    ApiResponse eliminarResiduo(Integer idResiduo, Integer usuarioSesion) throws ServiceException;
 
 }

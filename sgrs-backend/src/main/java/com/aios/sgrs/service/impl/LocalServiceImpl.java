@@ -49,7 +49,7 @@ public class LocalServiceImpl implements LocalService {
 
 
     @Override
-    public ApiResponse eliminarLocal(Integer idLocal, String usuarioSesion) throws ServiceException {
+    public ApiResponse eliminarLocal(Integer idLocal, Integer usuarioSesion) throws ServiceException {
 
         EliminarLocalRequest request = new EliminarLocalRequest();
         request.setLocal(idLocal);

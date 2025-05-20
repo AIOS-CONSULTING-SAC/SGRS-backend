@@ -27,7 +27,7 @@ public class LocalController {
     }
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApiResponse eliminar(@RequestParam("idLocal") Integer idLocal,@RequestParam("usuarioSesion") String usuarioSesion){
+    ApiResponse eliminar(@RequestParam("idLocal") Integer idLocal,@RequestParam("usuarioSesion") Integer usuarioSesion){
         return localService.eliminarLocal(idLocal, usuarioSesion);
     }
 

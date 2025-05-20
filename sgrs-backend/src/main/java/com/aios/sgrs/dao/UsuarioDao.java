@@ -1,6 +1,7 @@
 package com.aios.sgrs.dao;
 
 import com.aios.common.exception.AccesoDaoException;
+import com.aios.sgrs.model.request.usuario.EliminarUsuarioRequest;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
 import com.aios.sgrs.model.response.usuario.UsuarioResponse;
@@ -12,4 +13,6 @@ public interface UsuarioDao {
     UsuarioLogeadoResponse iniciarSesion(String usuario, String password) throws AccesoDaoException;
 
     List<UsuarioResponse> listado(int tipoSQL, Integer codUsuario, Integer codEmpresa, Integer codClinete, Integer idEstado) throws AccesoDaoException;
+
+    boolean eliminarUsuario(EliminarUsuarioRequest request) throws AccesoDaoException;
 }

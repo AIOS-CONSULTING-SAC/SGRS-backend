@@ -49,7 +49,7 @@ public class ResiduoServiceImpl implements ResiduoService {
 
 
     @Override
-    public ApiResponse eliminarResiduo(Integer idResiduo, String usuarioSesion) throws ServiceException {
+    public ApiResponse eliminarResiduo(Integer idResiduo, Integer usuarioSesion) throws ServiceException {
 
         EliminarResiduoRequest request = new EliminarResiduoRequest();
         request.setResiduo(idResiduo);

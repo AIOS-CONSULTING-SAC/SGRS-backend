@@ -45,10 +45,6 @@ public class EmpresaDaoImpl implements EmpresaDao {
                 empresa.setIdProvincia(rs.getInt(6));
                 empresa.setIdDistrito(rs.getInt(7));
 
-                empresa.setIdDepartamento(rs.getInt(5));
-                empresa.setIdProvincia(rs.getInt(6));
-                empresa.setIdDistrito(rs.getInt(7));
-
                 empresa.setDireccion(rs.getString(8));
                 empresa.setIdEstado(rs.getShort(9));
                 empresa.setDescEstado(empresa.getIdEstado()==1 ? "Activo" : "Inactivo");
@@ -88,12 +84,13 @@ public class EmpresaDaoImpl implements EmpresaDao {
         }));
     }
 
+
     @Override
     public boolean eliminarEmpresa(EliminarEmpresaRequest request) throws AccesoDaoException {
-        String sql = "{CALL sp_desactivar_empresa(?,?,?)";
+        String sql = "{CALL sp_desactivar_empresa(?,?,?)}";
         return Boolean.TRUE.equals(jdbcTemplate.execute(sql, (CallableStatement cs) -> {
             cs.setInt(1,request.getEmpresa());
-            cs.setString(2, request.getUsuarioSesion());
+            cs.setInt(2, request.getUsuarioSesion());
             cs.registerOutParameter(3, Types.VARCHAR);
 
             boolean rpta = cs.executeUpdate() == 1;

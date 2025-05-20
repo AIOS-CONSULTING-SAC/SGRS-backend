@@ -1,4 +1,4 @@
-package com.aios.sgrs.model.request.empresa;
+package com.aios.sgrs.model.request.usuario;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +7,8 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class EliminarEmpresaRequest {
-    private Integer empresa;
+public class EliminarUsuarioRequest {
+    private Integer usuario;
     private Integer usuarioSesion;
     private String mensaje;
 

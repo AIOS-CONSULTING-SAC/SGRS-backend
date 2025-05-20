@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 public class EliminarResiduoRequest {
     private Integer residuo;
-    private String usuarioSesion;
+    private Integer usuarioSesion;
     private String mensaje;
 
 }

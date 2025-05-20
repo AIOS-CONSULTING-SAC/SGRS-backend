@@ -78,7 +78,7 @@ public class ResiduoDaoImpl implements ResiduoDao {
         String sql = "{CALL sp_desactivar_residuo(?,?,?)}";
         return Boolean.TRUE.equals(jdbcTemplate.execute(sql, (CallableStatement cs) -> {
             cs.setInt(1,request.getResiduo());
-            cs.setString(2, request.getUsuarioSesion());
+            cs.setInt(2, request.getUsuarioSesion());
             cs.registerOutParameter(3, Types.VARCHAR);
 
             boolean rpta = cs.executeUpdate() == 1;

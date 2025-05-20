@@ -10,5 +10,5 @@ public interface LocalService {
 
     ApiResponse guardarLocal(GuardarLocalRequest request) throws ServiceException;
 
-    ApiResponse eliminarLocal(Integer idLocal, String usuarioSesion) throws ServiceException;
+    ApiResponse eliminarLocal(Integer idLocal, Integer usuarioSesion) throws ServiceException;
 }
