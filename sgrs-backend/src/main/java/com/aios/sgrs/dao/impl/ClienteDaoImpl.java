@@ -83,7 +83,9 @@ public class ClienteDaoImpl implements ClienteDao {
 
     @Override
     public boolean desactivarCliente(EliminarClienteRequest request) throws AccesoDaoException {
-        String sql = "{CALL sp_desactivar_cliente(?,?,?, ?)}";
+
+        String sql = "{CALL sp_desactivar_cliente(?,?,?,?)}";
+
         return Boolean.TRUE.equals(jdbcTemplate.execute(sql, (CallableStatement cs) -> {
             cs.setInt(1, request.getCliente());
             cs.setInt(2, request.getCodEmpresa());
