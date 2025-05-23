@@ -18,6 +18,7 @@ public class GuardarUsuarioRequest {
     private String nombre;
     private String apellidoP;
     private String apellidoM;
+    private String telefono;
     private String correo;
     private String password;
     private short idEstado;

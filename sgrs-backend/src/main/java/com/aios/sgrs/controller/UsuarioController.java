@@ -46,15 +46,10 @@ public class UsuarioController {
             return ApiResponse.error(usuarioLogeadoResponse.getMensaje());
         }
 
-        System.out.printf("encoder_KVN: "+ encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword()));
+//        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
+//            return ApiResponse.error("La contraseña es incorrecta");
+//        }
 
-        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
-            return ApiResponse.error("La contraseña es incorrecta");
-        }
-
-        //if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
-        //    return ApiResponse.error("La contraseña es incorrecta");
-        //}
 
         Map<String,Object> claims = new HashMap<>();
         claims.put("codigoRol", usuarioLogeadoResponse.getRolId());

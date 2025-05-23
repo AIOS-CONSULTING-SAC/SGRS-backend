@@ -26,7 +26,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
     @Override
     public boolean guardarUsuario(GuardarUsuarioRequest request) throws AccesoDaoException {
-        String sql = "{CALL sp_insertar_actualizar_usuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{CALL sp_insertar_actualizar_usuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         return Boolean.TRUE.equals(jdbcTemplate.execute(sql, (CallableStatement cs) -> {
 
             cs.setObject(1, request.getIdUsuario(), Types.INTEGER);
@@ -39,19 +39,20 @@ public class UsuarioDaoImpl implements UsuarioDao {
             cs.setString(8, request.getNombre());
             cs.setString(9, request.getApellidoP());
             cs.setString(10, request.getApellidoM());
-            cs.setString(11, request.getCorreo());
-            cs.setString(12, request.getPassword());
-            cs.setInt(13, request.getIdEstado());
-            cs.setInt(14, request.getUsuarioSesion());
+            cs.setString(11, request.getTelefono());
+            cs.setString(12, request.getCorreo());
+            cs.setString(13, request.getPassword());
+            cs.setInt(14, request.getIdEstado());
+            cs.setInt(15, request.getUsuarioSesion());
 
 
-            cs.registerOutParameter(15, Types.VARCHAR);
             cs.registerOutParameter(16, Types.VARCHAR);
+            cs.registerOutParameter(17, Types.VARCHAR);
 
 
             boolean rpta = cs.executeUpdate() == 1;
-            request.setMensaje(cs.getString(16));
-            request.setIdUsuario(cs.getInt(15));
+            request.setMensaje(cs.getString(17));
+            request.setIdUsuario(cs.getInt(16));
             return rpta;
         }));
     }
@@ -92,20 +93,25 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
                 usuario.setUsuario(rs.getInt(1));
                 usuario.setCodEmpresa(rs.getInt(2));
-                usuario.setCodCliente(rs.getInt(3));
-                usuario.setCodTipoUser(rs.getInt(4));
-                usuario.setCodPerfil(rs.getInt(5));
-                usuario.setCodTipoDoc(rs.getInt(6));
-                usuario.setNdoc(rs.getString(7));
-                usuario.setNombre(rs.getString(8));
-                usuario.setApellidoP(rs.getString(9));
-                usuario.setApellidoM(rs.getString(10));
-                usuario.setCorreo(rs.getString(11));
+                usuario.setDescEmpresa(rs.getString(3));
+                usuario.setCodCliente(rs.getInt(4));
+                usuario.setDescCliente(rs.getString(5));
+                usuario.setCodTipoUser(rs.getInt(6));
+                usuario.setDescTipoUser(rs.getString(7));
+                usuario.setCodPerfil(rs.getInt(8));
+                usuario.setDescPerfil(rs.getString(9));
+                usuario.setCodTipoDoc(rs.getInt(10));
+                usuario.setNdoc(rs.getString(11));
+                usuario.setNombre(rs.getString(12));
+                usuario.setApellidoP(rs.getString(13));
+                usuario.setApellidoM(rs.getString(14));
+                usuario.setTelefono(rs.getString(15));
+                usuario.setCorreo(rs.getString(16));
 
-                usuario.setIdEstado(rs.getShort(12));
+                usuario.setIdEstado(rs.getShort(17));
 
                 usuario.setDescEstado(usuario.getIdEstado()==1 ? "Activo" : "Inactivo");
-                usuario.setFechaRegistro(rs.getDate(13));
+                usuario.setFechaRegistro(rs.getDate(18));
                 listado.add(usuario);
             }
 
