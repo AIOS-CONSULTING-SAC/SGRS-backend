@@ -31,9 +31,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
             cs.setObject(1, request.getIdUsuario(), Types.INTEGER);
             cs.setInt(2, request.getIdEmpresa());
-            cs.setInt(3, request.getIdcliente());
+            cs.setObject(3, request.getIdCliente(), Types.INTEGER);
             cs.setInt(4, request.getIdTipoUser());
-            cs.setInt(5, request.getIdPerfil());
+            cs.setObject(5, request.getIdPerfil(), Types.INTEGER);
             cs.setInt(6, request.getIdTipoDoc());
             cs.setString(7, request.getNdoc());
             cs.setString(8, request.getNombre());
@@ -41,7 +41,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
             cs.setString(10, request.getApellidoM());
             cs.setString(11, request.getTelefono());
             cs.setString(12, request.getCorreo());
-            cs.setString(13, request.getPassword());
+            cs.setObject(13, request.getNombre().replace(" ", "") + request.getApellidoP(), Types.VARCHAR);
+//            cs.setString(13, request.getPassword());
             cs.setInt(14, request.getIdEstado());
             cs.setInt(15, request.getUsuarioSesion());
 
@@ -52,7 +53,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
             boolean rpta = cs.executeUpdate() == 1;
             request.setMensaje(cs.getString(17));
-            request.setIdUsuario(cs.getInt(16));
+            request.setIdUsuarioOut(cs.getInt(16));
             return rpta;
         }));
     }

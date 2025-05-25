@@ -66,11 +66,12 @@ public class ParametroDaoImpl implements ParametroDao {
             cs.setString(5, request.getDescOpcion());
             cs.setInt(6, request.getPrefijo());
             cs.setInt(7, request.getCorrelativo());
-            cs.setString(8, request.getDesc01());
-            cs.setString(9, request.getDesc02());
-            cs.setString(10, request.getDesc03());
-            cs.setInt(11, request.getInt01());
-            cs.setInt(12, request.getInt02());
+            cs.setObject(8, request.getDesc01(), Types.VARCHAR);
+            cs.setObject(9, request.getDesc02(), Types.VARCHAR);
+            cs.setObject(10, request.getDesc03(), Types.VARCHAR);
+            cs.setObject(11, request.getInt01(), Types.INTEGER);
+            cs.setObject(12, request.getInt02(), Types.INTEGER);
+
             cs.setInt(13, request.getIdEstado());
             cs.setInt(14, request.getUsuarioSesion());
 

@@ -32,7 +32,7 @@
                 <p style="font-size: 16px;">
                     Puedes ingresar al sistema desde la siguiente dirección:
                     <br/>
-                    <a href="http://aios-consulting.com/" target="_blank" style="color: #007b5e;">http://aios-consulting.com/</a>
+                    <a href=${link} target="_blank" style="color: #007b5e;">${link}</a>
                 </p>
 
                 <p style="font-size: 16px;">
@@ -45,7 +45,7 @@
 
                 <p style="font-size: 16px;">
                     Atentamente,<br/>
-                    <strong>AIOS Consulting SAC</strong>
+                    <strong>${empresa}</strong>
                 </p>
             </td>
         </tr>

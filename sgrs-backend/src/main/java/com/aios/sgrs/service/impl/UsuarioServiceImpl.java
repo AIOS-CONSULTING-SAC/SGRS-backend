@@ -3,8 +3,10 @@ package com.aios.sgrs.service.impl;
 import com.aios.common.exception.ServiceException;
 import com.aios.common.response.ApiResponseBuilder;
 import com.aios.sgrs.Objeto;
+import com.aios.sgrs.dao.ParametroDao;
 import com.aios.sgrs.dao.UsuarioDao;
 import com.aios.sgrs.model.request.usuario.EliminarUsuarioRequest;
+import com.aios.sgrs.model.response.parametro.ParametroResponse;
 import com.aios.sgrs.model.response.residuo.ResiduoResponse;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
@@ -24,29 +26,16 @@ import java.util.List;
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioDao usuarioDao;
+    private final ParametroDao parametroDao;
     private final EmailService emailService;
     private final ApiResponseBuilder<Object> responseBuilder;
-    public UsuarioServiceImpl(UsuarioDao usuarioDao, EmailService emailService, ApiResponseBuilder<Object>  responseBuilder){
+    public UsuarioServiceImpl(UsuarioDao usuarioDao, ParametroDao parametroDao, EmailService emailService, ApiResponseBuilder<Object>  responseBuilder){
         this.usuarioDao = usuarioDao;
+        this.parametroDao = parametroDao;
         this.emailService = emailService;
         this.responseBuilder = responseBuilder;
     }
 
-//    @Override
-//    public ApiResponse guardarUsuario(GuardarUsuarioRequest request) throws ServiceException {
-//        usuarioDao.guardarUsuario(request);
-//        String codRpuesta = "501";
-//        if(codRpuesta.equals("501")){
-//            try {
-////                emailService.enviarCorreoUsuario( request.getCorreo(), request.getUsuarioSesion(), "123");
-//                emailService.enviarCorreoUsuario( request.getCorreo(), "USUARIO PRUEBA", "123");
-//            } catch (Exception e) {
-//                throw new RuntimeException(e);
-//            }
-//            return ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());
-//        }
-//        return  ApiResponse.error(codRpuesta);
-//    }
 
     @Override
     public ApiResponse guardarUsuario(GuardarUsuarioRequest request) throws ServiceException {
@@ -54,14 +43,50 @@ public class UsuarioServiceImpl implements UsuarioService {
             request.setIdEstado((short) 1);
         }
         usuarioDao.guardarUsuario(request);
+
         String codRpuesta = request.getMensaje();
+
         if(codRpuesta.equals("200")) {
-//            try {
-//                emailService.enviarCorreoUsuario( request.getCorreo(), "USUARIO PRUEBA", "123");
-//            } catch (Exception e) {
-//                throw new RuntimeException(e);
-//            }
-//            return ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());
+            try {
+                List<ParametroResponse> listMail = parametroDao.listarParametros(1,1, 2, 4, null, null, null, null, null, 1);
+
+                ParametroResponse resultadoMail = listMail.stream()
+                        .filter(p -> p.getCorrelativo() == request.getIdEmpresa())
+                        .findFirst()
+                        .orElse(null);
+
+                if (resultadoMail != null) {
+                    String empresa = resultadoMail.getDescripcion1();
+                    String link = resultadoMail.getDescripcion2();
+
+
+                    List<ParametroResponse> listadoCredenciales = parametroDao.listarParametros(1,1, 2, 5, null, null, null, null, null, 1);
+
+                    ParametroResponse resultadoCredenciales = listadoCredenciales.stream()
+                            .filter(p -> p.getCorrelativo() == request.getIdEmpresa())
+                            .findFirst()
+                            .orElse(null);
+
+
+                    System.out.println("resultadoCredenciales: " + resultadoCredenciales);
+
+                    if (resultadoCredenciales != null) {
+
+                        String host = resultadoCredenciales.getDescripcion1();
+                        String username = resultadoCredenciales.getDescripcion2();
+                        String password = resultadoCredenciales.getDescripcion3();
+                        Integer port = resultadoCredenciales.getEntero01();
+
+                        emailService.enviarCorreoUsuario( request.getCorreo(), request.getNombre()+ " " + request.getApellidoP() + " " + request.getApellidoM(), request.getNombre().replace(" ", "") + request.getApellidoP(),
+                                empresa, link,
+                                host, port, username, password);
+                    }
+                }
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());
         }
 
         return !codRpuesta.equals("200") ? ApiResponse.error(codRpuesta) : ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());

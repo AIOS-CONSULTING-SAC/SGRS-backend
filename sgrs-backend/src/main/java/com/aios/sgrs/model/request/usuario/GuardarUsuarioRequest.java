@@ -10,7 +10,7 @@ import lombok.ToString;
 public class GuardarUsuarioRequest {
     private Integer idUsuario;
     private Integer idEmpresa;
-    private Integer idcliente;
+    private Integer idCliente;
     private Integer idTipoUser;
     private Integer idPerfil;
     private Integer idTipoDoc;
@@ -23,6 +23,8 @@ public class GuardarUsuarioRequest {
     private String password;
     private short idEstado;
     private Integer usuarioSesion;
+
+    private Integer idUsuarioOut;
     private String mensaje;
 
 }
