@@ -16,6 +16,7 @@ import com.aios.sgrs.service.EmailService;
 import com.aios.sgrs.service.UsuarioService;
 import com.aios.sgrs.utils.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,11 +43,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         if(request.getIdUsuario()==null){
             request.setIdEstado((short) 1);
         }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String passwordGenerada =request.getApellidoP().substring(0,2).concat(request.getNombre().substring(0,3)).concat(request.getApellidoM().substring(0,2));
+        encoder.encode(passwordGenerada);
+        String passwordEncriptada = encoder.encode(passwordGenerada);
+        request.setPassword(passwordEncriptada);
         usuarioDao.guardarUsuario(request);
-
+        System.out.println(passwordGenerada);
+        System.out.println(passwordEncriptada);
         String codRpuesta = request.getMensaje();
 
-        if(codRpuesta.equals("200")) {
+        if(codRpuesta.equals("200") && request.getIdUsuario()==null) {
             try {
                 List<ParametroResponse> listMail = parametroDao.listarParametros(1,1, 2, 4, null, null, null, null, null, 1);
 

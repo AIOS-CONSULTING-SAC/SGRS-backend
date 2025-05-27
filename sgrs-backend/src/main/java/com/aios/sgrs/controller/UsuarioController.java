@@ -40,15 +40,16 @@ public class UsuarioController {
     public ApiResponse login(@RequestBody UsuarioRequest req, HttpServletRequest httpServletRequest ) {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        UsuarioLogeadoResponse usuarioLogeadoResponse = usuarioService.iniciarSesion(req, httpServletRequest);
 
+        UsuarioLogeadoResponse usuarioLogeadoResponse = usuarioService.iniciarSesion(req, httpServletRequest);
+        System.out.println(encoder.encode(req.getPassword()));
         if (usuarioLogeadoResponse.getResultado() != 3) {
             return ApiResponse.error(usuarioLogeadoResponse.getMensaje());
         }
 
-//        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
-//            return ApiResponse.error("La contraseña es incorrecta");
-//        }
+        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
+           return ApiResponse.error("La contraseña es incorrecta");
+       }
 
 
         Map<String,Object> claims = new HashMap<>();

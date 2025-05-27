@@ -41,8 +41,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
             cs.setString(10, request.getApellidoM());
             cs.setString(11, request.getTelefono());
             cs.setString(12, request.getCorreo());
-            cs.setObject(13, request.getNombre().replace(" ", "") + request.getApellidoP(), Types.VARCHAR);
-//            cs.setString(13, request.getPassword());
+            //cs.setObject(13, request.getNombre().replace(" ", "") + request.getApellidoP(), Types.VARCHAR);
+            cs.setString(13, request.getPassword());
             cs.setInt(14, request.getIdEstado());
             cs.setInt(15, request.getUsuarioSesion());
 
