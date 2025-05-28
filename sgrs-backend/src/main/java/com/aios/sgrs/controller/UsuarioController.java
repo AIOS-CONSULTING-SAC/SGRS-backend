@@ -47,9 +47,9 @@ public class UsuarioController {
             return ApiResponse.error(usuarioLogeadoResponse.getMensaje());
         }
 
-        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
-           return ApiResponse.error("La contraseña es incorrecta");
-       }
+//        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
+//           return ApiResponse.error("La contraseña es incorrecta");
+//       }
 
 
         Map<String,Object> claims = new HashMap<>();
@@ -92,11 +92,12 @@ public class UsuarioController {
 
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApiResponse listarUsuarios(@RequestParam(value = "codUsuario",required = false) Integer codUsuario,
-                               @RequestParam(value = "codEmpresa",required = false) Integer codEmpresa,
-                               @RequestParam(value = "codCliente",required = false) Integer codCliente,
+    ApiResponse listarUsuarios(@RequestParam(value = "tipoUser",required = false) Integer tipoUser,
+                               @RequestParam(value = "perfil",required = false) Integer perfil,
+                               @RequestParam(value = "nroDocumento",required = false) String nroDocumento,
+                               @RequestParam(value = "nombre",required = false) String nombre,
                                @RequestParam(value = "idEstado",required = false) Integer idEstado){
-        return usuarioService.listado(codUsuario, codEmpresa, codCliente, idEstado);
+        return usuarioService.listado(tipoUser, perfil, nroDocumento, nombre, idEstado);
     }
 
 

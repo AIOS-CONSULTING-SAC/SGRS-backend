@@ -11,7 +11,7 @@ public interface UsuarioService {
     ApiResponse guardarUsuario(GuardarUsuarioRequest request) throws ServiceException;
     UsuarioLogeadoResponse iniciarSesion(UsuarioRequest usuarioRequest, HttpServletRequest request);
 
-    ApiResponse listado(Integer codUsuario, Integer codEmpresa, Integer codCliente, Integer idEstado) throws ServiceException;
+    abstract ApiResponse listado(Integer tipoUser, Integer perfil, String nroDocumento, String nombre, Integer idEstado) throws ServiceException;
 
     ApiResponse eliminarUsuario(Integer idCliente, Integer usuarioSesion) throws ServiceException;
 }

@@ -82,11 +82,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public List<UsuarioResponse> listado(int tipoSQL, Integer codUsuario, Integer codEmpresa, Integer codClinete, Integer idEstado) throws AccesoDaoException {
-        String sql = "{CALL sp_listar_usuarios(?, ?, ?, ?, ?)}";
+    public List<UsuarioResponse> listado(int tipoSQL, Integer tipoUser, Integer perfil, String nroDocumento, String nombre, Integer idEstado) throws AccesoDaoException {
+        String sql = "{CALL sp_listar_usuarios(?, ?, ?, ?, ?, ? )}";
         List<UsuarioResponse> listado = new ArrayList<>();
 
-        return jdbcTemplate.query(sql, new Object[]{tipoSQL, codUsuario, codEmpresa, codClinete, idEstado}, rs -> {
+        return jdbcTemplate.query(sql, new Object[]{tipoSQL, tipoUser, perfil, nroDocumento, nombre, idEstado}, rs -> {
 
             UsuarioResponse usuario;
             while (rs.next()) {
