@@ -94,10 +94,11 @@ public class UsuarioController {
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse listarUsuarios(@RequestParam(value = "tipoUser",required = false) Integer tipoUser,
                                @RequestParam(value = "perfil",required = false) Integer perfil,
+                               @RequestParam(value = "cliente",required = false) Integer cliente,
                                @RequestParam(value = "nroDocumento",required = false) String nroDocumento,
                                @RequestParam(value = "nombre",required = false) String nombre,
                                @RequestParam(value = "idEstado",required = false) Integer idEstado){
-        return usuarioService.listado(tipoUser, perfil, nroDocumento, nombre, idEstado);
+        return usuarioService.listado(tipoUser, perfil, cliente, nroDocumento, nombre, idEstado);
     }
 
 

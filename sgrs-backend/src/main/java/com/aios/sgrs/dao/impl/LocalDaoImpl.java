@@ -29,11 +29,11 @@ public class LocalDaoImpl implements LocalDao {
     }
 
     @Override
-    public List<LocalResponse> listado(int tipoSQL, int codCliente, Integer idEstado) throws AccesoDaoException {
-        String sql = "{CALL sp_listar_locales(?, ?, ?)}";
+    public List<LocalResponse> listado(int tipoSQL, Integer codCliente, String descLocal, Integer idEstado) throws AccesoDaoException {
+        String sql = "{CALL sp_listar_locales(?, ?, ?, ?)}";
         List<LocalResponse> listado = new ArrayList<>();
 
-        return jdbcTemplate.query(sql, new Object[]{tipoSQL, codCliente, idEstado}, rs -> {
+        return jdbcTemplate.query(sql, new Object[]{tipoSQL, codCliente, descLocal, idEstado}, rs -> {
 
             LocalResponse local;
             while (rs.next()) {

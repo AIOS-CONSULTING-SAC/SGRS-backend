@@ -25,11 +25,11 @@ public class ResiduoDaoImpl implements ResiduoDao {
     }
 
     @Override
-    public List<ResiduoResponse> listado(int tipoSQL, int codCliente, Integer idEstado) throws AccesoDaoException {
-        String sql = "{CALL sp_listar_residuos(?, ?, ?)}";
+    public List<ResiduoResponse> listado(int tipoSQL, Integer codCliente, String descResiduo, Integer idEstado) throws AccesoDaoException {
+        String sql = "{CALL sp_listar_residuos(?, ?, ?, ?)}";
         List<ResiduoResponse> listado = new ArrayList<>();
 
-        return jdbcTemplate.query(sql, new Object[]{tipoSQL, codCliente, idEstado}, rs -> {
+        return jdbcTemplate.query(sql, new Object[]{tipoSQL, codCliente, descResiduo, idEstado}, rs -> {
 
             ResiduoResponse local;
             while (rs.next()) {

@@ -25,8 +25,9 @@ public class ResiduoController {
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse listarResiduos(@RequestParam(value = "codCliente",required = false) Integer codCliente,
+                               @RequestParam(value = "descResiduo",required = false) String descResiduo,
                                @RequestParam(value = "idEstado",required = false) Integer idEstado){
-        return residuoService.listado(codCliente, idEstado);
+        return residuoService.listado(codCliente, descResiduo, idEstado);
     }
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)

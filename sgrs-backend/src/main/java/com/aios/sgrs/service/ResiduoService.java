@@ -6,7 +6,7 @@ import com.aios.sgrs.model.request.residuo.GuardarResiduoRequest;
 import com.aios.sgrs.utils.ApiResponse;
 
 public interface ResiduoService {
-    ApiResponse listado(Integer codCliente, Integer idEstado) throws ServiceException;
+    ApiResponse listado(Integer codCliente, String descResidu, Integer idEstado) throws ServiceException;
 
     ApiResponse guardarResiduo(GuardarResiduoRequest request) throws ServiceException;
 

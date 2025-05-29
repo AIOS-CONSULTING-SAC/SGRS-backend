@@ -107,8 +107,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     @Override
-    public ApiResponse listado(Integer tipoUser, Integer perfil, String nroDocumento, String nombre, Integer idEstado) throws ServiceException {
-        List<UsuarioResponse> listado = usuarioDao.listado(1,tipoUser, perfil, nroDocumento, nombre, idEstado);
+    public ApiResponse listado(Integer tipoUser, Integer perfil, Integer cliente, String nroDocumento, String nombre, Integer idEstado) throws ServiceException {
+        List<UsuarioResponse> listado = usuarioDao.listado(1,tipoUser, perfil, cliente, nroDocumento, nombre, idEstado);
 
         return Objeto.nonEmpty(listado)
                 ? ApiResponse.exito(responseBuilder.respuestaConExito(listado).getBody())

@@ -27,8 +27,8 @@ public class ResiduoServiceImpl implements ResiduoService {
     }
 
     @Override
-    public ApiResponse listado(Integer codCliente, Integer idEstado) throws ServiceException {
-        List<ResiduoResponse> listado = residuoDao.listado(1,codCliente, idEstado);
+    public ApiResponse listado(Integer codCliente, String descResidu, Integer idEstado) throws ServiceException {
+        List<ResiduoResponse> listado = residuoDao.listado(1,codCliente, descResidu, idEstado);
 
 
         return Objeto.nonEmpty(listado)

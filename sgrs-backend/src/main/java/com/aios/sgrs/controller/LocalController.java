@@ -22,8 +22,9 @@ public class LocalController {
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse listarLocales(@RequestParam(value = "codCliente",required = false) Integer codCliente,
+                              @RequestParam(value = "descLocal",required = false) String descLocal,
                                @RequestParam(value = "idEstado",required = false) Integer idEstado){
-        return localService.listado(codCliente, idEstado);
+        return localService.listado(codCliente, descLocal, idEstado);
     }
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)

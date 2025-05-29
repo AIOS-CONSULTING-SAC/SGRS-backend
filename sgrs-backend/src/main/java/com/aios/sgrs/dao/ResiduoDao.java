@@ -8,7 +8,7 @@ import com.aios.sgrs.model.response.residuo.ResiduoResponse;
 import java.util.List;
 
 public interface ResiduoDao {
-    List<ResiduoResponse> listado(int tipoSQL, int codCliente, Integer idEstado) throws AccesoDaoException;
+    List<ResiduoResponse> listado(int tipoSQL, Integer codCliente, String descResidu, Integer idEstado) throws AccesoDaoException;
 
     boolean guardarResiduo(GuardarResiduoRequest request) throws AccesoDaoException;
 

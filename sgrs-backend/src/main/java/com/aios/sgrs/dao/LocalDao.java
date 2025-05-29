@@ -11,7 +11,7 @@ import com.aios.sgrs.model.response.local.LocalResponse;
 import java.util.List;
 
 public interface LocalDao {
-    List<LocalResponse> listado(int tipoSQL, int codCliente, Integer idEstado) throws AccesoDaoException;
+    List<LocalResponse> listado(int tipoSQL, Integer codCliente, String descLocal, Integer idEstado) throws AccesoDaoException;
 
     boolean guardarLocal(GuardarLocalRequest request) throws AccesoDaoException;
 

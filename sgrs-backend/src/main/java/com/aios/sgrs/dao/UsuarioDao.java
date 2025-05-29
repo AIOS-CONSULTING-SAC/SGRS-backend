@@ -12,7 +12,7 @@ public interface UsuarioDao {
     boolean guardarUsuario(GuardarUsuarioRequest request) throws AccesoDaoException;
     UsuarioLogeadoResponse iniciarSesion(String usuario, String password) throws AccesoDaoException;
 
-    List<UsuarioResponse> listado(int tipoSQL, Integer tipoUser, Integer perfil, String nroDocumento, String nombre, Integer idEstado) throws AccesoDaoException;
+    List<UsuarioResponse> listado(int tipoSQL, Integer tipoUser, Integer perfil, Integer cliente, String nroDocumento, String nombre, Integer idEstado) throws AccesoDaoException;
 
     boolean eliminarUsuario(EliminarUsuarioRequest request) throws AccesoDaoException;
 }

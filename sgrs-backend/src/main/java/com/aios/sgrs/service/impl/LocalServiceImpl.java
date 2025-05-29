@@ -27,8 +27,8 @@ public class LocalServiceImpl implements LocalService {
     }
 
     @Override
-    public ApiResponse listado(Integer codCliente, Integer idEstado) throws ServiceException {
-        List<LocalResponse> listado = localDao.listado(1,codCliente, idEstado);
+    public ApiResponse listado(Integer codCliente, String descLocal, Integer idEstado) throws ServiceException {
+        List<LocalResponse> listado = localDao.listado(1,codCliente, descLocal, idEstado);
 
 
         return Objeto.nonEmpty(listado)
