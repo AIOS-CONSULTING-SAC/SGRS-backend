@@ -39,10 +39,11 @@ public class ResiduoDaoImpl implements ResiduoDao {
                 local.setCodCliente(rs.getInt(2));
                 local.setDescripcion(rs.getString(3));
                 local.setIdUnidad(rs.getInt(4));
-                local.setIdEstado(rs.getShort(5));
+                local.setDescUnidad(rs.getString(5));
+                local.setIdEstado(rs.getShort(6));
 
                 local.setDescEstado(local.getIdEstado()==1 ? "Activo" : "Inactivo");
-                local.setFechaRegistro(rs.getDate(6));
+                local.setFechaRegistro(rs.getDate(7));
                 listado.add(local);
             }
 

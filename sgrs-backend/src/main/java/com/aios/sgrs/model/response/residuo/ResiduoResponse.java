@@ -16,6 +16,7 @@ public class ResiduoResponse {
     private Integer codCliente;
     private String descripcion;
     private Integer idUnidad;
+    private String descUnidad;
     private short idEstado;
     private String descEstado;
     private Date fechaRegistro;
