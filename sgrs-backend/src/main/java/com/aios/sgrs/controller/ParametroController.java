@@ -3,6 +3,7 @@ package com.aios.sgrs.controller;
 import com.aios.sgrs.model.request.parametro.GuardarParametroRequest;
 import com.aios.sgrs.service.ParametroService;
 import com.aios.sgrs.utils.ApiResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class ParametroController {
 
     private final ParametroService parametroService;
-
-    public ParametroController(ParametroService parametroService ){
+    private HttpServletRequest httpServletRequest;
+    public ParametroController(ParametroService parametroService,
+                               HttpServletRequest httpServletRequest){
         this.parametroService = parametroService;
+
     }
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
