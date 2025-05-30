@@ -27,8 +27,8 @@ public class ParametroServiceImpl implements ParametroService {
     }
 
     @Override
-    public ApiResponse listado(Integer codModulo, Integer codOpcion, Integer codPrefijo, String desc1, String desc2, String desc3, Integer int01, Integer int02, Integer idEstado) throws ServiceException {
-        List<ParametroResponse> listado = parametroDao.listarParametros(1,codModulo, codOpcion, codPrefijo, desc1, desc2, desc3, int01, int02, idEstado);
+    public ApiResponse listado(Integer tipoSQL, Integer codModulo, Integer codOpcion, Integer codPrefijo, String desc1, String desc2, String desc3, Integer int01, Integer int02, Integer idEstado) throws ServiceException {
+        List<ParametroResponse> listado = parametroDao.listarParametros(tipoSQL, codModulo, codOpcion, codPrefijo, desc1, desc2, desc3, int01, int02, idEstado);
 
         return Objeto.nonEmpty(listado)
                 ? ApiResponse.exito(responseBuilder.respuestaConExito(listado).getBody())

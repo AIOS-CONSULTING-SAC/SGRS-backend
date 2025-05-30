@@ -22,7 +22,8 @@ public class ParametroController {
     }
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApiResponse listarParametro(@RequestParam(value = "codModulo",required = false) Integer codModulo,
+    ApiResponse listarParametro(@RequestParam(value = "tipoSQL",required = false) Integer tipoSQL,
+                                @RequestParam(value = "codModulo",required = false) Integer codModulo,
                                 @RequestParam(value = "codOpcion",required = false) Integer codOpcion,
                                 @RequestParam(value = "codPrefijo",required = false) Integer codPrefijo,
                                 @RequestParam(value = "desc1",required = false) String desc1,
@@ -31,7 +32,7 @@ public class ParametroController {
                                 @RequestParam(value = "int01",required = false) Integer int01,
                                 @RequestParam(value = "int02",required = false) Integer int02,
                                @RequestParam(value = "idEstado",required = false) Integer idEstado){
-        return parametroService.listado(codModulo, codOpcion, codPrefijo, desc1, desc2, desc3, int01, int02, idEstado);
+        return parametroService.listado(tipoSQL, codModulo, codOpcion, codPrefijo, desc1, desc2, desc3, int01, int02, idEstado);
     }
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
