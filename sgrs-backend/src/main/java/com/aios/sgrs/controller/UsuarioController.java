@@ -43,6 +43,9 @@ public class UsuarioController {
 
         UsuarioLogeadoResponse usuarioLogeadoResponse = usuarioService.iniciarSesion(req, httpServletRequest);
         System.out.println(encoder.encode(req.getPassword()));
+
+        System.out.println("usuarioLogeadoResponse: " + usuarioLogeadoResponse);
+
         if (usuarioLogeadoResponse.getResultado() != 3) {
             return ApiResponse.error(usuarioLogeadoResponse.getMensaje());
         }
@@ -60,6 +63,8 @@ public class UsuarioController {
         claims.put("nombres", usuarioLogeadoResponse.getNombres());
         claims.put("apellidoP", usuarioLogeadoResponse.getApellidoP());
         claims.put("apellidoM", usuarioLogeadoResponse.getApellidoM());
+        claims.put("cliente", usuarioLogeadoResponse.getCliente());
+        claims.put("descCliente", usuarioLogeadoResponse.getDescCliente());
         String accessToken = jwtService.generateToken(
                 claims,
                 req.getUsuario(),

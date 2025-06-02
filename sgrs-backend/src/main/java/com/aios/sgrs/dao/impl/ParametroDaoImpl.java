@@ -65,7 +65,8 @@ public class ParametroDaoImpl implements ParametroDao {
             cs.setInt(4, request.getCodOpcion());
             cs.setString(5, request.getDescOpcion());
             cs.setInt(6, request.getPrefijo());
-            cs.setInt(7, request.getCorrelativo());
+//            cs.setInt(7, request.getCorrelativo());
+            cs.setObject(7, request.getCorrelativo(), Types.INTEGER);
             cs.setObject(8, request.getDesc01(), Types.VARCHAR);
             cs.setObject(9, request.getDesc02(), Types.VARCHAR);
             cs.setObject(10, request.getDesc03(), Types.VARCHAR);

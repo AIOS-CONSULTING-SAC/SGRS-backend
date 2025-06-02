@@ -14,6 +14,8 @@ public class UsuarioLogeadoResponse {
     private String nombres;
     private String apellidoP;
     private String apellidoM;
+    private int cliente;
+    private String descCliente;
     private String password;
     private int tipoUsuarioId;
     private Integer rolId;
