@@ -4,7 +4,6 @@ import com.aios.sgrs.config.JwtUtils;
 import com.aios.sgrs.model.request.residuo.GuardarResiduoRequest;
 import com.aios.sgrs.service.ResiduoService;
 import com.aios.sgrs.utils.ApiResponse;
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;

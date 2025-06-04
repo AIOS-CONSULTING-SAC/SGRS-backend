@@ -1,20 +1,16 @@
 package com.aios.sgrs.controller;
 
-import com.aios.sgrs.model.request.residuo.GuardarResiduoRequest;
-import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
+import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.security.JwtService;
 import com.aios.sgrs.security.TokenType;
 import com.aios.sgrs.service.UsuarioService;
 import com.aios.sgrs.utils.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -39,21 +35,16 @@ public class UsuarioController {
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse login(@RequestBody UsuarioRequest req, HttpServletRequest httpServletRequest ) {
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         UsuarioLogeadoResponse usuarioLogeadoResponse = usuarioService.iniciarSesion(req, httpServletRequest);
-        System.out.println(encoder.encode(req.getPassword()));
-
-        System.out.println("usuarioLogeadoResponse: " + usuarioLogeadoResponse);
-
         if (usuarioLogeadoResponse.getResultado() != 3) {
             return ApiResponse.error(usuarioLogeadoResponse.getMensaje());
         }
 
-        /*if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
            return ApiResponse.error("La contraseña es incorrecta");
-       }*/
-
+       }
 
         Map<String,Object> claims = new HashMap<>();
         claims.put("codigoRol", usuarioLogeadoResponse.getRolId());

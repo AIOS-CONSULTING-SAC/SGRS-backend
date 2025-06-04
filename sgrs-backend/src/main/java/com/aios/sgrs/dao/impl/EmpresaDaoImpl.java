@@ -5,7 +5,6 @@ import com.aios.sgrs.dao.EmpresaDao;
 import com.aios.sgrs.model.request.empresa.EliminarEmpresaRequest;
 import com.aios.sgrs.model.request.empresa.GuardarEmpresaRequest;
 import com.aios.sgrs.model.response.empresa.EmpresaResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

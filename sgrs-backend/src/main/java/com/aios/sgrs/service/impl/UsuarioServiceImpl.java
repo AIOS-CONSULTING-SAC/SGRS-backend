@@ -5,12 +5,11 @@ import com.aios.common.response.ApiResponseBuilder;
 import com.aios.sgrs.Objeto;
 import com.aios.sgrs.dao.ParametroDao;
 import com.aios.sgrs.dao.UsuarioDao;
-import com.aios.sgrs.model.request.usuario.EliminarUsuarioRequest;
-import com.aios.sgrs.model.response.parametro.ParametroResponse;
-import com.aios.sgrs.model.response.residuo.ResiduoResponse;
-import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
+import com.aios.sgrs.model.request.usuario.EliminarUsuarioRequest;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
+import com.aios.sgrs.model.response.parametro.ParametroResponse;
+import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.model.response.usuario.UsuarioResponse;
 import com.aios.sgrs.service.EmailService;
 import com.aios.sgrs.service.UsuarioService;
@@ -45,12 +44,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String passwordGenerada =request.getApellidoP().substring(0,2).concat(request.getNombre().substring(0,3)).concat(request.getApellidoM().substring(0,2));
-        encoder.encode(passwordGenerada);
         String passwordEncriptada = encoder.encode(passwordGenerada);
         request.setPassword(passwordEncriptada);
+
         usuarioDao.guardarUsuario(request);
-        System.out.println(passwordGenerada);
-        System.out.println(passwordEncriptada);
+
         String codRpuesta = request.getMensaje();
 
         if(codRpuesta.equals("200") && request.getIdUsuario()==null) {
@@ -74,11 +72,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                             .findFirst()
                             .orElse(null);
 
-
-                    System.out.println("resultadoCredenciales: " + resultadoCredenciales);
-
                     if (resultadoCredenciales != null) {
-
                         String host = resultadoCredenciales.getDescripcion1();
                         String username = resultadoCredenciales.getDescripcion2();
                         String password = resultadoCredenciales.getDescripcion3();
@@ -86,7 +80,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
                         emailService.enviarCorreoUsuario( request.getCorreo(), request.getNombre()+ " " + request.getApellidoP() + " " + request.getApellidoM(), request.getNombre().replace(" ", "") + request.getApellidoP(),
                                 empresa, link,
-                                host, port, username, password);
+                               host, port, username, password);
                     }
                 }
 

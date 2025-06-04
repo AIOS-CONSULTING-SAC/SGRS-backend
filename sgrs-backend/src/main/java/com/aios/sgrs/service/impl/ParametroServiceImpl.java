@@ -48,7 +48,6 @@ public class ParametroServiceImpl implements ParametroService {
         return !codRpuesta.equals("200") ? ApiResponse.error(codRpuesta) : ApiResponse.exito(responseBuilder.respuestaConExito(codRpuesta).getBody());
     }
 
-
     @Override
     public ApiResponse eliminarParametro(Integer idParametro, Integer usuarioSesion) throws ServiceException {
 
