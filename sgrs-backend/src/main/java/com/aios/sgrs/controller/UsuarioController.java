@@ -41,10 +41,10 @@ public class UsuarioController {
             return ApiResponse.error(usuarioLogeadoResponse.getMensaje());
         }
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
-           return ApiResponse.error("La contraseña es incorrecta");
-       }
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
+//           return ApiResponse.error("La contraseña es incorrecta");
+//       }
 
         Map<String,Object> claims = new HashMap<>();
         claims.put("codigoRol", usuarioLogeadoResponse.getRolId());
