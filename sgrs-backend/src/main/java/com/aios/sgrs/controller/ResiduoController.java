@@ -22,6 +22,10 @@ public class ResiduoController {
         this.httpServletRequest = httpServletRequest;
     }
 
+    private Integer getCodigoUsuario() {
+        return JwtUtils.getCodigoUsuario(httpServletRequest.getHeader("Authorization"));
+    }
+
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse listarResiduos(@RequestParam(value = "codCliente",required = false) Integer codCliente,
                                @RequestParam(value = "descResiduo",required = false) String descResiduo,
@@ -30,21 +34,23 @@ public class ResiduoController {
     }
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApiResponse eliminar(@RequestParam("idResiduo") Integer idResiduo,@RequestParam("usuarioSesion") Integer usuarioSesion){
-        System.out.println(httpServletRequest.getHeader("Authorization"));
-        Integer codigoUsuario = JwtUtils.getCodigoUsuario(httpServletRequest.getHeader("Authorization"));
-        System.out.println(codigoUsuario);
+    ApiResponse eliminar(@RequestParam("idResiduo") Integer idResiduo){
+        Integer codigoUsuario = getCodigoUsuario();
         return residuoService.eliminarResiduo(idResiduo, codigoUsuario);
     }
 
 
     @PostMapping(value = "/guardar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse guardar(@Valid @RequestBody GuardarResiduoRequest request){
+        Integer codigoUsuario = getCodigoUsuario();
+        request.setUsuarioSesion(codigoUsuario);
         return residuoService.guardarResiduo(request);
     }
 
     @PutMapping(value = "/actualizar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse actualizar(@Valid @RequestBody GuardarResiduoRequest request){
+        Integer codigoUsuario = getCodigoUsuario();
+        request.setUsuarioSesion(codigoUsuario);
         return residuoService.guardarResiduo(request);
     }
 

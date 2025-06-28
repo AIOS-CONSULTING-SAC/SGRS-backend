@@ -1,8 +1,10 @@
 package com.aios.sgrs.controller;
 
+import com.aios.sgrs.config.JwtUtils;
 import com.aios.sgrs.model.request.manejoResiduo.GuardarManejoResiduoRequest;
 import com.aios.sgrs.service.ManejoResiduoService;
 import com.aios.sgrs.utils.ApiResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,15 @@ import org.springframework.web.bind.annotation.*;
 public class ManejoResiduoController {
 
     private final ManejoResiduoService manejoResiduoService;
+    private final HttpServletRequest httpServletRequest;
 
-    public ManejoResiduoController(ManejoResiduoService manejoResiduoService){
+    public ManejoResiduoController(ManejoResiduoService manejoResiduoService, HttpServletRequest httpServletRequest){
         this.manejoResiduoService = manejoResiduoService;
+        this.httpServletRequest = httpServletRequest;
+    }
+
+    private Integer getCodigoUsuario() {
+        return JwtUtils.getCodigoUsuario(httpServletRequest.getHeader("Authorization"));
     }
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,6 +37,8 @@ public class ManejoResiduoController {
 
     @PostMapping(value = "/guardar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse guardar(@Valid @RequestBody GuardarManejoResiduoRequest request){
+        Integer codigoUsuario = getCodigoUsuario();
+        request.setUsuarioSesion(codigoUsuario);
         return manejoResiduoService.guardarManejoResiduo(request);
     }
 
