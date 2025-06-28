@@ -35,16 +35,15 @@ public class UsuarioController {
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse login(@RequestBody UsuarioRequest req, HttpServletRequest httpServletRequest ) {
 
-
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         UsuarioLogeadoResponse usuarioLogeadoResponse = usuarioService.iniciarSesion(req, httpServletRequest);
         if (usuarioLogeadoResponse.getResultado() != 3) {
             return ApiResponse.error(usuarioLogeadoResponse.getMensaje());
         }
 
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
-//           return ApiResponse.error("La contraseña es incorrecta");
-//       }
+       if (!encoder.matches(req.getPassword(), usuarioLogeadoResponse.getPassword())) {
+           return ApiResponse.error("La contraseña es incorrecta");
+       }
 
         Map<String,Object> claims = new HashMap<>();
         claims.put("codigoRol", usuarioLogeadoResponse.getRolId());
