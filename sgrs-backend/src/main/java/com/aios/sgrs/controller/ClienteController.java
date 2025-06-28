@@ -1,8 +1,10 @@
 package com.aios.sgrs.controller;
 
+import com.aios.sgrs.config.JwtUtils;
 import com.aios.sgrs.model.request.cliente.GuardarClienteRequest;
 import com.aios.sgrs.service.ClienteService;
 import com.aios.sgrs.utils.ApiResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,15 @@ import org.springframework.web.bind.annotation.*;
 public class ClienteController {
 
     private final ClienteService clienteService;
+    private final HttpServletRequest httpServletRequest;
 
-    public ClienteController(ClienteService clienteService){
+    public ClienteController(ClienteService clienteService, HttpServletRequest httpServletRequest){
         this.clienteService = clienteService;
+        this.httpServletRequest = httpServletRequest;
+    }
+
+    private Integer getCodigoUsuario() {
+        return JwtUtils.getCodigoUsuario(httpServletRequest.getHeader("Authorization"));
     }
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -28,19 +36,23 @@ public class ClienteController {
 
     @PostMapping(value = "/guardar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse guardar(@Valid @RequestBody GuardarClienteRequest request){
+        Integer codigoUsuario = getCodigoUsuario();
+        request.setUsuarioSesion(codigoUsuario);
         return clienteService.guardarCliente(request);
     }
 
     @PutMapping(value = "/actualizar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse actualizar(@Valid @RequestBody GuardarClienteRequest request){
+        Integer codigoUsuario = getCodigoUsuario();
+        request.setUsuarioSesion(codigoUsuario);
         return clienteService.guardarCliente(request);
     }
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse eliminar(@RequestParam("idCliente") Integer idCliente,
-                         @RequestParam("idEmpresa") Integer idEmpresa,
-                         @RequestParam("usuarioSesion") Integer usuarioSesion){
-        return clienteService.eliminarCliente(idCliente, idEmpresa, usuarioSesion);
+                         @RequestParam("idEmpresa") Integer idEmpresa){
+        Integer codigoUsuario = getCodigoUsuario();
+        return clienteService.eliminarCliente(idCliente, idEmpresa, codigoUsuario);
     }
 
 }

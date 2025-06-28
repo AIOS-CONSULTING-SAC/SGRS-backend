@@ -1,5 +1,6 @@
 package com.aios.sgrs.controller;
 
+import com.aios.sgrs.config.JwtUtils;
 import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
@@ -24,12 +25,19 @@ public class UsuarioController {
     //private final AuthenticationManager authManager;
     private final JwtService jwtService;
     private final UsuarioService usuarioService;
+    private final HttpServletRequest httpServletRequest;
     public UsuarioController(UsuarioService usuarioService,
                              //                       AuthenticationManager authManager,
-                             JwtService jwtService) {
+                             JwtService jwtService,
+                             HttpServletRequest httpServletRequest) {
         this.usuarioService = usuarioService;
-      //  this.authManager = authManager;
+        //  this.authManager = authManager;
         this.jwtService = jwtService;
+        this.httpServletRequest = httpServletRequest;
+    }
+
+    private Integer getCodigoUsuario() {
+        return JwtUtils.getCodigoUsuario(httpServletRequest.getHeader("Authorization"));
     }
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -77,11 +85,15 @@ public class UsuarioController {
 
     @PostMapping(value = "/guardar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse guardar(@Valid @RequestBody GuardarUsuarioRequest request) {
+        Integer codigoUsuario = getCodigoUsuario();
+        request.setUsuarioSesion(codigoUsuario);
         return usuarioService.guardarUsuario(request);
     }
 
     @PutMapping(value = "/actualizar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse actualizar(@Valid @RequestBody GuardarUsuarioRequest request){
+        Integer codigoUsuario = getCodigoUsuario();
+        request.setUsuarioSesion(codigoUsuario);
         return usuarioService.guardarUsuario(request);
     }
 
@@ -98,8 +110,9 @@ public class UsuarioController {
 
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApiResponse eliminar(@RequestParam("idUsuario") Integer idUsuario,@RequestParam("usuarioSesion") Integer usuarioSesion){
-        return usuarioService.eliminarUsuario(idUsuario, usuarioSesion);
+    ApiResponse eliminar(@RequestParam("idUsuario") Integer idUsuario){
+        Integer codigoUsuario = getCodigoUsuario();
+        return usuarioService.eliminarUsuario(idUsuario, codigoUsuario);
     }
 
 }

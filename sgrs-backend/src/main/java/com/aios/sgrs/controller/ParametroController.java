@@ -1,5 +1,6 @@
 package com.aios.sgrs.controller;
 
+import com.aios.sgrs.config.JwtUtils;
 import com.aios.sgrs.model.request.parametro.GuardarParametroRequest;
 import com.aios.sgrs.service.ParametroService;
 import com.aios.sgrs.utils.ApiResponse;
@@ -14,11 +15,15 @@ import org.springframework.web.bind.annotation.*;
 public class ParametroController {
 
     private final ParametroService parametroService;
-    private HttpServletRequest httpServletRequest;
+    private final HttpServletRequest httpServletRequest;
     public ParametroController(ParametroService parametroService,
                                HttpServletRequest httpServletRequest){
         this.parametroService = parametroService;
+        this.httpServletRequest = httpServletRequest;
+    }
 
+    private Integer getCodigoUsuario() {
+        return JwtUtils.getCodigoUsuario(httpServletRequest.getHeader("Authorization"));
     }
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,18 +41,23 @@ public class ParametroController {
     }
 
     @DeleteMapping(value = "/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApiResponse eliminar(@RequestParam("idParametro") Integer idParametro,@RequestParam("usuarioSesion") Integer usuarioSesion){
-        return parametroService.eliminarParametro(idParametro, usuarioSesion);
+    ApiResponse eliminar(@RequestParam("idParametro") Integer idParametro){
+        Integer codigoUsuario = getCodigoUsuario();
+        return parametroService.eliminarParametro(idParametro, codigoUsuario);
     }
 
 
     @PostMapping(value = "/guardar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse guardar(@Valid @RequestBody GuardarParametroRequest request){
+        Integer codigoUsuario = getCodigoUsuario();
+        request.setUsuarioSesion(codigoUsuario);
         return parametroService.guardarParametro(request);
     }
 
     @PutMapping(value = "/actualizar", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse actualizar(@Valid @RequestBody GuardarParametroRequest request){
+        Integer codigoUsuario = getCodigoUsuario();
+        request.setUsuarioSesion(codigoUsuario);
         return parametroService.guardarParametro(request);
     }
 
