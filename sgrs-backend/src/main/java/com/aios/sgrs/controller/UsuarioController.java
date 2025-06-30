@@ -8,12 +8,12 @@ import com.aios.sgrs.security.JwtService;
 import com.aios.sgrs.security.TokenType;
 import com.aios.sgrs.service.UsuarioService;
 import com.aios.sgrs.utils.ApiResponse;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

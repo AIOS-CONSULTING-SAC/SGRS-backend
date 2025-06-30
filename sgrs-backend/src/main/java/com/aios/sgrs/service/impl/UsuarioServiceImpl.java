@@ -14,11 +14,11 @@ import com.aios.sgrs.model.response.usuario.UsuarioResponse;
 import com.aios.sgrs.service.EmailService;
 import com.aios.sgrs.service.UsuarioService;
 import com.aios.sgrs.utils.ApiResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service

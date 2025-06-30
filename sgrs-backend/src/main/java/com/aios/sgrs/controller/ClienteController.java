@@ -4,10 +4,11 @@ import com.aios.sgrs.config.JwtUtils;
 import com.aios.sgrs.model.request.cliente.GuardarClienteRequest;
 import com.aios.sgrs.service.ClienteService;
 import com.aios.sgrs.utils.ApiResponse;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @CrossOrigin
 @RestController

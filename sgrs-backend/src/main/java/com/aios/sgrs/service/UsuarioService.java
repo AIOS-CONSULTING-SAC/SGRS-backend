@@ -5,7 +5,8 @@ import com.aios.sgrs.model.request.seguridad.UsuarioRequest;
 import com.aios.sgrs.model.request.usuario.GuardarUsuarioRequest;
 import com.aios.sgrs.model.response.seguridad.UsuarioLogeadoResponse;
 import com.aios.sgrs.utils.ApiResponse;
-import jakarta.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 public interface UsuarioService {
     ApiResponse guardarUsuario(GuardarUsuarioRequest request) throws ServiceException;

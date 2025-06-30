@@ -1,7 +1,6 @@
 
 package com.aios.sgrs.service;
 
-import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -12,6 +11,7 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
+import javax.mail.internet.MimeMessage;
 import java.time.Year;
 import java.util.HashMap;
 import java.util.Map;

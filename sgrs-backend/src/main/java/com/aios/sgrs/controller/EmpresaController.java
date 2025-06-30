@@ -4,8 +4,8 @@ import com.aios.sgrs.config.JwtUtils;
 import com.aios.sgrs.model.request.empresa.GuardarEmpresaRequest;
 import com.aios.sgrs.service.EmpresaService;
 import com.aios.sgrs.utils.ApiResponse;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
