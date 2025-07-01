@@ -19,5 +19,6 @@ public class UsuarioLogeadoResponse {
     private String password;
     private int tipoUsuarioId;
     private Integer rolId;
+    private String perfil;
     private Integer empresaId;
 }

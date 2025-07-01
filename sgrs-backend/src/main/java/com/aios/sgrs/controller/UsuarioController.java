@@ -55,6 +55,7 @@ public class UsuarioController {
 
         Map<String,Object> claims = new HashMap<>();
         claims.put("codigoRol", usuarioLogeadoResponse.getRolId());
+        claims.put("perfil", usuarioLogeadoResponse.getPerfil());
         claims.put("codigoEmpresa", usuarioLogeadoResponse.getEmpresaId());
         claims.put("codigoUsuario", usuarioLogeadoResponse.getUsuarioId());
         claims.put("tipoUsuario", usuarioLogeadoResponse.getTipoUsuarioId());
