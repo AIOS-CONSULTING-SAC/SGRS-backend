@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.aios.sgrs</groupId>
 	<artifactId>sgrs-backend</artifactId>
-	<version>3.0</version>
+	<version>1.0</version>
 	<packaging>war</packaging>
 	<name>SGRS</name>
 	<description>Backend de Sistema de Gestión de Residuos Sólidos</description>
