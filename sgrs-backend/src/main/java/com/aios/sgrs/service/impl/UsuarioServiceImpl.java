@@ -46,9 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         String passwordGenerada =request.getApellidoP().substring(0,2).concat(request.getNombre().substring(0,3)).concat(request.getApellidoM().substring(0,2));
         String passwordEncriptada = encoder.encode(passwordGenerada);
         request.setPassword(passwordEncriptada);
-
         usuarioDao.guardarUsuario(request);
-
         String codRpuesta = request.getMensaje();
 
         if(codRpuesta.equals("200") && request.getIdUsuario()==null) {
@@ -64,7 +62,6 @@ public class UsuarioServiceImpl implements UsuarioService {
                     String empresa = resultadoMail.getDescripcion1();
                     String link = resultadoMail.getDescripcion2();
 
-
                     List<ParametroResponse> listadoCredenciales = parametroDao.listarParametros(1,1, 2, 5, null, null, null, null, null, 1);
 
                     ParametroResponse resultadoCredenciales = listadoCredenciales.stream()
@@ -78,7 +75,8 @@ public class UsuarioServiceImpl implements UsuarioService {
                         String password = resultadoCredenciales.getDescripcion3();
                         Integer port = resultadoCredenciales.getEntero01();
 
-                        emailService.enviarCorreoUsuario( request.getCorreo(), request.getNombre()+ " " + request.getApellidoP() + " " + request.getApellidoM(), request.getNombre().replace(" ", "") + request.getApellidoP(),
+                        emailService.enviarCorreoUsuario( request.getCorreo(), request.getNombre()+ " " + request.getApellidoP() + " " + request.getApellidoM(),
+                                passwordGenerada,
                                 empresa, link,
                                host, port, username, password);
                     }

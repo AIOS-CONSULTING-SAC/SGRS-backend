@@ -14,7 +14,7 @@
 
     <appender name="RollingFile"
         class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${logdir}/sgnoc-web.log</file>
+        <file>${logdir}/sgrs-backend.log</file>
         <encoder
             class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level [%F:%L] %logger{36}.%M - %msg%n</Pattern>
@@ -22,7 +22,7 @@
 
         <rollingPolicy
             class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${logdir}/sgnoc-web-%d{yyyy-MM-dd}.%i.log
+            <fileNamePattern>${logdir}/sgrs-backend-%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
